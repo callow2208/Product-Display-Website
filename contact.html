@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- =============================================
+       KNOTTED & KIND — Contact Page (contact.html)
+       ============================================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Knotted & Kind</title>
+
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================================
+       CSS VARIABLES
+       ============================================= */
+    :root {
+      --cream:     #faf6f1;
+      --beige:     #ede6d9;
+      --blush:     #e8c9c0;
+      --dusty:     #d4a9a0;
+      --sage:      #b8c4b1;
+      --warm-gray: #a89b8c;
+      --dark:      #3d3530;
+      --mid:       #7a6b5f;
+      --radius:    1rem;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body:    'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--dark);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: var(--font-display);
+      font-weight: 400;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* =============================================
+       NAVBAR
+       ============================================= */
+    .navbar {
+      background-color: rgba(250, 246, 241, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--beige);
+      padding: 1rem 0;
+      transition: box-shadow 0.3s;
+    }
+
+    .navbar.scrolled { box-shadow: 0 2px 20px rgba(61,53,48,0.08); }
+
+    .navbar-brand {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--dark) !important;
+      letter-spacing: 0.03em;
+    }
+
+    .navbar-brand span { color: var(--dusty); font-style: italic; }
+
+    .nav-link {
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid) !important;
+      padding: 0.4rem 1rem !important;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover, .nav-link.active { color: var(--dark) !important; }
+    .navbar-toggler { border: none; box-shadow: none !important; }
+
+    /* =============================================
+       PAGE HERO
+       ============================================= */
+    .page-hero {
+      background: linear-gradient(135deg, var(--beige) 0%, #f0ddd5 100%);
+      padding: 5rem 0 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::after {
+      content: '💌';
+      position: absolute;
+      font-size: 12rem;
+      right: -1rem;
+      top: -2rem;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    .breadcrumb-custom {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+    }
+
+    .breadcrumb-custom a { color: var(--dusty); }
+    .breadcrumb-custom span { margin: 0 0.5rem; }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--dark);
+      line-height: 1.1;
+    }
+
+    .page-subtitle { color: var(--mid); font-size: 0.95rem; max-width: 500px; }
+
+    /* =============================================
+       MAIN CONTACT SECTION
+       ============================================= */
+    .contact-section { padding: 5rem 0; }
+
+    /* =============================================
+       CONTACT FORM CARD
+       ============================================= */
+    .form-card {
+      background: var(--cream);
+      border: 1px solid var(--beige);
+      border-radius: calc(var(--radius) * 1.5);
+      padding: 2.5rem;
+      box-shadow: 0 8px 32px rgba(61,53,48,0.06);
+    }
+
+    .form-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-control {
+      background: var(--beige);
+      border: 1px solid transparent;
+      border-radius: 0.65rem;
+      padding: 0.8rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--dark);
+      font-weight: 300;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .form-control::placeholder { color: var(--warm-gray); }
+
+    .form-control:focus {
+      background: var(--cream);
+      border-color: var(--dusty);
+      box-shadow: 0 0 0 3px rgba(212,169,160,0.18);
+      outline: none;
+    }
+
+    /* Validation states */
+    .form-control.is-valid {
+      border-color: var(--sage);
+      background: var(--cream);
+      box-shadow: none;
+    }
+
+    .form-control.is-invalid {
+      border-color: #c97c6a;
+      background: var(--cream);
+      box-shadow: none;
+    }
+
+    .invalid-feedback {
+      font-size: 0.75rem;
+      color: #c97c6a;
+      margin-top: 0.3rem;
+    }
+
+    textarea.form-control { resize: vertical; min-height: 130px; }
+
+    /* Submit button */
+    .btn-submit {
+      background-color: var(--dark);
+      color: var(--cream);
+      border: none;
+      padding: 0.9rem 2.4rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 100px;
+      width: 100%;
+      transition: background 0.3s, transform 0.2s;
+      font-weight: 400;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-submit:hover { background-color: var(--dusty); transform: translateY(-2px); }
+
+    .btn-submit:active { transform: translateY(0); }
+
+    /* Form section label */
+    .form-section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dusty);
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .form-subtitle {
+      font-size: 0.85rem;
+      color: var(--mid);
+      margin-bottom: 2rem;
+    }
+
+    /* Success message */
+    .success-msg {
+      display: none;
+      background: #e6f4ea;
+      border: 1px solid #b8d9be;
+      border-radius: var(--radius);
+      padding: 1.2rem 1.5rem;
+      color: #3a6b42;
+      font-size: 0.88rem;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .success-msg.show { display: flex; }
+    .success-msg i { font-size: 1.2rem; }
+
+    /* Character counter */
+    .char-counter {
+      font-size: 0.72rem;
+      color: var(--warm-gray);
+      text-align: right;
+      margin-top: 0.3rem;
+    }
+
+    /* =============================================
+       INFO SIDEBAR
+       ============================================= */
+    .info-section { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .info-card {
+      background: var(--beige);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .info-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(61,53,48,0.08); }
+
+    .info-icon {
+      width: 46px; height: 46px;
+      background: var(--blush);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      color: var(--dark);
+    }
+
+    .info-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dusty);
+      margin-bottom: 0.2rem;
+      font-weight: 500;
+    }
+
+    .info-value {
+      font-size: 0.9rem;
+      color: var(--dark);
+      line-height: 1.5;
+    }
+
+    .info-note { font-size: 0.78rem; color: var(--mid); margin-top: 0.2rem; }
+
+    /* WhatsApp CTA card */
+    .wa-cta-card {
+      background: var(--dark);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      color: var(--cream);
+      text-align: center;
+    }
+
+    .wa-cta-card h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
+      font-style: italic;
+    }
+
+    .wa-cta-card p {
+      font-size: 0.8rem;
+      color: rgba(250,246,241,0.6);
+      margin-bottom: 1.2rem;
+    }
+
+    .btn-wa-large {
+      background: #25d366;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      border-radius: 100px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s, transform 0.2s;
+      font-weight: 400;
+    }
+
+    .btn-wa-large:hover { background: #1da851; color: #fff; transform: translateY(-1px); }
+
+    /* =============================================
+       MAP SECTION
+       ============================================= */
+    .map-section {
+      padding: 0 0 5rem;
+    }
+
+    .map-wrapper {
+      border-radius: calc(var(--radius) * 1.5);
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(61,53,48,0.08);
+      border: 1px solid var(--beige);
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 380px;
+      background: linear-gradient(135deg, var(--beige) 0%, #e8dfd5 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Placeholder map grid lines */
+    .map-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(61,53,48,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(61,53,48,0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .map-pin {
+      width: 52px; height: 52px;
+      background: var(--dusty);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      box-shadow: 0 4px 16px rgba(212,169,160,0.4);
+      position: relative;
+      z-index: 1;
+    }
+
+    .map-pin::after {
+      content: '';
+      width: 22px; height: 22px;
+      background: var(--cream);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .map-label {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--dark);
+      position: relative;
+      z-index: 1;
+    }
+
+    .map-sublabel {
+      font-size: 0.78rem;
+      color: var(--mid);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* =============================================
+       FAQ SECTION
+       ============================================= */
+    .faq-section { padding: 0 0 5rem; }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dusty);
+      font-weight: 500;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 300;
+    }
+
+    .section-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--blush);
+      margin: 1rem 0 2rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--beige);
+      padding: 1.3rem 0;
+    }
+
+    .faq-question {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      user-select: none;
+    }
+
+    .faq-icon {
+      color: var(--dusty);
+      font-size: 0.9rem;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .faq-answer {
+      font-size: 0.88rem;
+      color: var(--mid);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .faq-item.open .faq-answer { max-height: 200px; padding-top: 0.8rem; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    /* =============================================
+       FOOTER
+       ============================================= */
+    footer {
+      background-color: var(--dark);
+      color: var(--cream);
+      padding: 4rem 0 1.5rem;
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 300;
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-brand span { color: var(--dusty); font-style: italic; }
+
+    .footer-heading {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dusty);
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+
+    .footer-link {
+      display: block;
+      font-size: 0.88rem;
+      color: rgba(250,246,241,0.65);
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover { color: var(--cream); }
+
+    .footer-social a {
+      width: 38px; height: 38px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(250,246,241,0.6);
+      margin-right: 0.5rem;
+      transition: all 0.2s;
+      font-size: 0.85rem;
+    }
+
+    .footer-social a:hover { border-color: var(--dusty); color: var(--dusty); transform: translateY(-2px); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.5rem;
+      margin-top: 3rem;
+      font-size: 0.78rem;
+      color: rgba(250,246,241,0.35);
+    }
+
+    /* =============================================
+       WHATSAPP FLOAT
+       ============================================= */
+    .wa-float {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 58px; height: 58px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+      z-index: 9999;
+      transition: transform 0.3s;
+      animation: pulse-wa 3s ease-in-out infinite;
+    }
+
+    .wa-float:hover { transform: scale(1.1); color: #fff; }
+
+    @keyframes pulse-wa {
+      0%, 100% { box-shadow: 0 8px 24px rgba(37,211,102,0.35), 0 0 0 0 rgba(37,211,102,0.4); }
+      50%       { box-shadow: 0 8px 24px rgba(37,211,102,0.35), 0 0 0 12px rgba(37,211,102,0); }
+    }
+
+    /* =============================================
+       REVEAL ANIMATIONS
+       ============================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .page-hero { padding: 4rem 0 2.5rem; }
+      .form-card { padding: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       STICKY NAVBAR
+       ============================================= -->
+  <nav class="navbar navbar-expand-lg sticky-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Knotted <span>& Kind</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <i class="fa-solid fa-bars" style="color: var(--mid);"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="products.html">Shop</a></li>
+          <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+          <li class="nav-item ms-lg-2">
+            <a href="products.html" style="background:var(--dark); color:var(--cream); padding:0.55rem 1.4rem; font-size:0.75rem; border-radius:100px; letter-spacing:0.1em; text-transform:uppercase;">
+              Shop Now
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- =============================================
+       PAGE HERO
+       ============================================= -->
+  <div class="page-hero">
+    <div class="container">
+      <p class="breadcrumb-custom mb-3">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        Contact
+      </p>
+      <h1 class="page-title mb-2">Say Hello 👋</h1>
+      <p class="page-subtitle">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. We'd love to hear from you — whether it's a custom order, question, or just saying hi!
+      </p>
+    </div>
+  </div>
+
+
+  <!-- =============================================
+       MAIN CONTACT SECTION
+       ============================================= -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="row g-5">
+
+        <!-- LEFT: Contact Form -->
+        <div class="col-lg-7 reveal">
+          <div class="form-card">
+            <p class="form-section-label">Send a Message</p>
+            <h2 class="form-title">Let's talk</h2>
+            <p class="form-subtitle">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. We'll get back to you within 24 hours.
+            </p>
+
+            <!-- Success Message (hidden by default, shown after submission) -->
+            <div class="success-msg" id="successMsg">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Thank you! Your message has been sent. We'll reach out soon. 🌸</span>
+            </div>
+
+            <!-- Contact Form -->
+            <form id="contactForm" novalidate>
+
+              <!-- Name Field -->
+              <div class="mb-4">
+                <label for="name" class="form-label">Your Name *</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="name"
+                  placeholder="e.g. Priya Sharma"
+                  autocomplete="name"
+                />
+                <div class="invalid-feedback" id="nameError">Please enter your name (min. 2 characters).</div>
+              </div>
+
+              <!-- Email Field -->
+              <div class="mb-4">
+                <label for="email" class="form-label">Email Address *</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="e.g. hello@example.com"
+                  autocomplete="email"
+                />
+                <div class="invalid-feedback" id="emailError">Please enter a valid email address.</div>
+              </div>
+
+              <!-- Phone Field (optional) -->
+              <div class="mb-4">
+                <label for="phone" class="form-label">Phone / WhatsApp <span style="color:var(--warm-gray); font-size:0.7rem;">(Optional)</span></label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="phone"
+                  name="phone"
+                  placeholder="e.g. +91 98765 43210"
+                />
+              </div>
+
+              <!-- Subject Field -->
+              <div class="mb-4">
+                <label for="subject" class="form-label">Subject *</label>
+                <select class="form-control" id="subject" name="subject">
+                  <option value="" disabled selected>Select a topic...</option>
+                  <option value="order">Place an Order</option>
+                  <option value="custom">Custom Order Enquiry</option>
+                  <option value="shipping">Shipping & Delivery</option>
+                  <option value="other">Other</option>
+                </select>
+                <div class="invalid-feedback" id="subjectError">Please select a subject.</div>
+              </div>
+
+              <!-- Message Field -->
+              <div class="mb-4">
+                <label for="message" class="form-label">Message *</label>
+                <textarea
+                  class="form-control"
+                  id="message"
+                  name="message"
+                  rows="5"
+                  placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+                  maxlength="500"
+                ></textarea>
+                <div class="char-counter"><span id="charCount">0</span> / 500</div>
+                <div class="invalid-feedback" id="messageError">Please enter a message (min. 10 characters).</div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn-submit" id="submitBtn">
+                <i class="fa-solid fa-paper-plane me-2"></i>Send Message
+              </button>
+
+            </form>
+          </div>
+        </div>
+
+        <!-- RIGHT: Contact Info Sidebar -->
+        <div class="col-lg-5 reveal">
+          <div class="info-section">
+
+            <!-- Email -->
+            <div class="info-card">
+              <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div>
+                <p class="info-label">Email Us</p>
+                <p class="info-value">hello@knottedandkind.com</p>
+                <p class="info-note">We reply within 24 hours on weekdays.</p>
+              </div>
+            </div>
+
+            <!-- WhatsApp -->
+            <div class="info-card">
+              <div class="info-icon" style="background:#d4eed9;"><i class="fa-brands fa-whatsapp" style="color:#25d366;"></i></div>
+              <div>
+                <p class="info-label">WhatsApp</p>
+                <p class="info-value">+91 99999 99999</p>
+                <p class="info-note">Mon–Sat, 10 AM – 7 PM IST</p>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <div class="info-card">
+              <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div>
+                <p class="info-label">Location</p>
+                <p class="info-value">Mumbai, Maharashtra<br>India — 400001</p>
+                <p class="info-note">Shipping across India.</p>
+              </div>
+            </div>
+
+            <!-- Instagram -->
+            <div class="info-card">
+              <div class="info-icon" style="background:#f0dde8;"><i class="fa-brands fa-instagram" style="color:#c96da0;"></i></div>
+              <div>
+                <p class="info-label">Instagram</p>
+                <p class="info-value">@knottedandkind</p>
+                <p class="info-note">Follow us for behind-the-scenes!</p>
+              </div>
+            </div>
+
+            <!-- WhatsApp Direct CTA -->
+            <div class="wa-cta-card">
+              <h4>Prefer to chat directly?</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing. Quick responses on WhatsApp.</p>
+              <a href="https://wa.me/919999999999?text=Hello%20Knotted%20%26%20Kind!%20I%20have%20a%20query."
+                 class="btn-wa-large" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       MAP SECTION (Google Maps placeholder)
+       ============================================= -->
+  <section class="map-section">
+    <div class="container">
+      <div class="mb-4 reveal">
+        <p class="section-label">Find Us</p>
+        <h2 class="section-title">Our Location</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="map-wrapper reveal">
+        <!-- 
+          NOTE: Replace the iframe below with your actual Google Maps embed.
+          To get the embed code:
+          1. Go to maps.google.com
+          2. Search your location
+          3. Click Share > Embed a map
+          4. Copy the <iframe> code and paste here.
+          
+          Placeholder shown below:
+        -->
+        <div class="map-placeholder">
+          <div class="map-pin"></div>
+          <p class="map-label">Knotted & Kind Studio</p>
+          <p class="map-sublabel">Mumbai, Maharashtra, India</p>
+          <a href="https://maps.google.com/?q=Mumbai,Maharashtra,India"
+             target="_blank"
+             style="position:relative; z-index:1; background:var(--dark); color:var(--cream); padding:0.6rem 1.4rem; border-radius:100px; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; display:inline-flex; align-items:center; gap:0.5rem; margin-top:0.5rem; transition: all 0.2s;">
+            <i class="fa-solid fa-map-pin"></i> Open in Google Maps
+          </a>
+        </div>
+
+        <!-- ← UNCOMMENT AND PASTE YOUR ACTUAL GOOGLE MAPS IFRAME HERE:
+        <iframe
+          src="YOUR_GOOGLE_MAPS_EMBED_URL_HERE"
+          width="100%" height="380"
+          style="border:0; display:block;"
+          allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       FAQ SECTION
+       ============================================= -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="text-center mb-5 reveal">
+            <p class="section-label">FAQ</p>
+            <h2 class="section-title">Common Questions</h2>
+            <div class="section-divider mx-auto"></div>
+          </div>
+
+          <!-- FAQ Items -->
+          <div id="faqContainer">
+
+            <div class="faq-item reveal">
+              <div class="faq-question">
+                <span>Do you take custom orders?</span>
+                <i class="fa-solid fa-plus faq-icon"></i>
+              </div>
+              <div class="faq-answer">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. We happily accept custom orders — just reach out via WhatsApp or email.
+              </div>
+            </div>
+
+            <div class="faq-item reveal">
+              <div class="faq-question">
+                <span>How long does delivery take?</span>
+                <i class="fa-solid fa-plus faq-icon"></i>
+              </div>
+              <div class="faq-answer">
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Typically 5–7 business days within India. Express delivery is available on request.
+              </div>
+            </div>
+
+            <div class="faq-item reveal">
+              <div class="faq-question">
+                <span>What materials do you use?</span>
+                <i class="fa-solid fa-plus faq-icon"></i>
+              </div>
+              <div class="faq-answer">
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore. We use soft, baby-safe, premium quality yarns that are gentle on sensitive skin.
+              </div>
+            </div>
+
+            <div class="faq-item reveal">
+              <div class="faq-question">
+                <span>Do you offer gift wrapping?</span>
+                <i class="fa-solid fa-plus faq-icon"></i>
+              </div>
+              <div class="faq-answer">
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim. Yes! Beautiful gift packaging is available for all orders at a small extra charge.
+              </div>
+            </div>
+
+            <div class="faq-item reveal">
+              <div class="faq-question">
+                <span>How do I place an order?</span>
+                <i class="fa-solid fa-plus faq-icon"></i>
+              </div>
+              <div class="faq-answer">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquip commodo. Simply click the "Order on WhatsApp" button on any product, or send us a message on WhatsApp / email with the product name and your requirements.
+              </div>
+            </div>
+
+          </div><!-- /faqContainer -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       FOOTER
+       ============================================= -->
+  <footer>
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="footer-brand">Knotted <span>& Kind</span></div>
+          <p style="font-size:0.82rem; color: rgba(250,246,241,0.5); margin-bottom: 1rem;">
+            Handcrafted crochet pieces made with love, one stitch at a time.
+          </p>
+          <div class="footer-social">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+            <a href="https://wa.me/919999999999" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-6">
+          <p class="footer-heading">Navigate</p>
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="products.html" class="footer-link">Shop</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+        <div class="col-lg-2 col-6">
+          <p class="footer-heading">Products</p>
+          <a href="products.html" class="footer-link">Baby Clothes</a>
+          <a href="products.html" class="footer-link">Baby Socks</a>
+          <a href="products.html" class="footer-link">Hairbands</a>
+          <a href="products.html" class="footer-link">Keychains</a>
+        </div>
+        <div class="col-lg-4">
+          <p class="footer-heading">Get in Touch</p>
+          <p style="font-size:0.84rem; color: rgba(250,246,241,0.55); line-height: 2;">
+            <i class="fa-solid fa-envelope me-2" style="color: var(--dusty);"></i> hello@knottedandkind.com<br>
+            <i class="fa-brands fa-whatsapp me-2" style="color: #25d366;"></i> +91 99999 99999<br>
+            <i class="fa-solid fa-location-dot me-2" style="color: var(--dusty);"></i> Mumbai, India
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between">
+        <span>© 2025 Knotted & Kind. All rights reserved.</span>
+        <span>Made with 🧶 and love</span>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/919999999999?text=Hello%20Knotted%20%26%20Kind!%20I%20have%20a%20query."
+     class="wa-float" target="_blank" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+
+  <!-- =============================================
+       SCRIPTS
+       ============================================= -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* =============================================
+       NAVBAR SCROLL SHADOW
+       ============================================= */
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 30);
+    });
+
+    /* =============================================
+       CHARACTER COUNTER FOR MESSAGE FIELD
+       ============================================= */
+    const messageField = document.getElementById('message');
+    const charCount    = document.getElementById('charCount');
+
+    messageField.addEventListener('input', () => {
+      charCount.textContent = messageField.value.length;
+    });
+
+    /* =============================================
+       FORM VALIDATION (JavaScript)
+       All fields validated before submission.
+       ============================================= */
+    const form       = document.getElementById('contactForm');
+    const successMsg = document.getElementById('successMsg');
+
+    /**
+     * Validates a single field and updates its UI state.
+     * @param {HTMLElement} field   - The input/select/textarea element
+     * @param {boolean}     isValid - Whether validation passed
+     */
+    function setValid(field, isValid) {
+      field.classList.remove('is-valid', 'is-invalid');
+      field.classList.add(isValid ? 'is-valid' : 'is-invalid');
+    }
+
+    /**
+     * Validates the Name field:
+     * - Must not be empty
+     * - Must be at least 2 characters
+     */
+    function validateName() {
+      const name = document.getElementById('name');
+      const val  = name.value.trim();
+      const ok   = val.length >= 2;
+      setValid(name, ok);
+      return ok;
+    }
+
+    /**
+     * Validates the Email field using a simple regex pattern.
+     */
+    function validateEmail() {
+      const email = document.getElementById('email');
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const ok    = regex.test(email.value.trim());
+      setValid(email, ok);
+      return ok;
+    }
+
+    /**
+     * Validates the Subject select:
+     * - Must have a non-empty value selected
+     */
+    function validateSubject() {
+      const subject = document.getElementById('subject');
+      const ok      = subject.value !== '';
+      setValid(subject, ok);
+      return ok;
+    }
+
+    /**
+     * Validates the Message field:
+     * - Must be at least 10 characters
+     */
+    function validateMessage() {
+      const msg = document.getElementById('message');
+      const ok  = msg.value.trim().length >= 10;
+      setValid(msg, ok);
+      return ok;
+    }
+
+    /* Live validation on blur (better UX) */
+    document.getElementById('name').addEventListener('blur', validateName);
+    document.getElementById('email').addEventListener('blur', validateEmail);
+    document.getElementById('subject').addEventListener('change', validateSubject);
+    document.getElementById('message').addEventListener('blur', validateMessage);
+
+    /* Form Submit Handler */
+    form.addEventListener('submit', (e) => {
+      e.preventDefault(); // Prevent default form submission
+
+      // Run all validations
+      const nameOk    = validateName();
+      const emailOk   = validateEmail();
+      const subjectOk = validateSubject();
+      const msgOk     = validateMessage();
+
+      // If all fields are valid
+      if (nameOk && emailOk && subjectOk && msgOk) {
+        // Show success message
+        successMsg.classList.add('show');
+
+        // Simulate form reset after brief delay
+        const btn = document.getElementById('submitBtn');
+        btn.textContent = '✓ Message Sent!';
+        btn.style.background = '#3a6b42';
+
+        setTimeout(() => {
+          form.reset();
+          // Clear validation states
+          form.querySelectorAll('.form-control').forEach(f => {
+            f.classList.remove('is-valid', 'is-invalid');
+          });
+          charCount.textContent = '0';
+          btn.innerHTML = '<i class="fa-solid fa-paper-plane me-2"></i>Send Message';
+          btn.style.background = '';
+          // Hide success message after 6 seconds
+          setTimeout(() => successMsg.classList.remove('show'), 6000);
+        }, 1800);
+
+      } else {
+        // Scroll to the first invalid field
+        const firstInvalid = form.querySelector('.is-invalid');
+        if (firstInvalid) {
+          firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          firstInvalid.focus();
+        }
+      }
+    });
+
+    /* =============================================
+       FAQ ACCORDION
+       ============================================= */
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item   = question.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+
+        // Close all open items
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+
+        // Open clicked item if it wasn't open
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    /* =============================================
+       REVEAL ON SCROLL
+       ============================================= */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
