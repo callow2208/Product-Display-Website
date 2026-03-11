@@ -561,7 +561,7 @@ productForm?.addEventListener("submit", e => {
     description: desc,
     price,
     originalPrice: origPr ? parseFloat(origPr) : null,
-    waNumber: waNum || "919999999999",
+    waNumber: waNum || "919824010313",
     visible,
     featured
   };

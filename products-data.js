@@ -23,7 +23,7 @@ const DEFAULT_PRODUCTS = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.",
     price: 450,
     originalPrice: null,
-    waNumber: "919999999999",
+    waNumber: "919824010313",
     visible: true,
     featured: true,
     sortOrder: 1
@@ -40,7 +40,7 @@ const DEFAULT_PRODUCTS = [
     description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis.",
     price: 150,
     originalPrice: null,
-    waNumber: "919999999999",
+    waNumber: "919824010313",
     visible: true,
     featured: true,
     sortOrder: 2
@@ -57,7 +57,7 @@ const DEFAULT_PRODUCTS = [
     description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur.",
     price: 200,
     originalPrice: null,
-    waNumber: "919999999999",
+    waNumber: "919824010313",
     visible: true,
     featured: false,
     sortOrder: 3
@@ -74,7 +74,7 @@ const DEFAULT_PRODUCTS = [
     description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     price: 120,
     originalPrice: 160,
-    waNumber: "919999999999",
+    waNumber: "919824010313",
     visible: true,
     featured: true,
     sortOrder: 4
@@ -91,7 +91,7 @@ const DEFAULT_PRODUCTS = [
     description: "Lorem ipsum dolor sit amet consectetur. Pellentesque habitant morbi tristique senectus et netus malesuada fames turpis.",
     price: 80,
     originalPrice: null,
-    waNumber: "919999999999",
+    waNumber: "919824010313",
     visible: true,
     featured: false,
     sortOrder: 5
@@ -108,7 +108,7 @@ const DEFAULT_PRODUCTS = [
     description: "Ut enim ad minim veniam quis nostrud exercitation laboris nisi aliquip commodo consequat aute irure dolor.",
     price: 60,
     originalPrice: null,
-    waNumber: "919999999999",
+    waNumber: "919824010313",
     visible: true,
     featured: false,
     sortOrder: 6
@@ -125,7 +125,7 @@ const DEFAULT_PRODUCTS = [
     description: "Duis aute irure dolor reprehenderit voluptate velit esse cillum dolore eu fugiat nulla pariatur sint occaecat.",
     price: 90,
     originalPrice: 120,
-    waNumber: "919999999999",
+    waNumber: "919824010313",
     visible: true,
     featured: true,
     sortOrder: 7
