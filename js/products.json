@@ -1,0 +1,74 @@
+[
+  {
+    "id": "prod_001",
+    "name": "Baby Clothes",
+    "imageUrl": "./img/1.png",
+    "category": "baby",
+    "price": 450,
+    "featured": true,
+    "sortOrder": 1
+  },
+  {
+    "id": "prod_002", 
+    "name": "Baby Socks",
+    "imageUrl": "./img/2.png",
+    "featured": true,
+    "sortOrder": 2
+  },
+  {
+    "id": "prod_003",
+    "name": "New Product",
+    "imageUrl": "./img/3.png",
+    "price": 250,
+    "featured": false,
+    "sortOrder": 3
+  },
+  {
+    "id": "prod_004",
+    "name": "Baby Hat",
+    "imageUrl": "./img/4.png",
+    "category": "baby",
+    "price": 450,
+    "featured": true,
+    "sortOrder": 1
+  },
+  {
+    "id": "prod_005", 
+    "name": "Baby Socks",
+    "imageUrl": "./img/5.png",
+    "featured": true,
+    "sortOrder": 2
+  },
+  {
+    "id": "prod_006",
+    "name": "New Product",
+    "imageUrl": "./img/6.png",
+    "price": 250,
+    "featured": false,
+    "sortOrder": 3
+  },
+  {
+    "id": "prod_007",
+    "name": "Baby Clothes",
+    "imageUrl": "./img/7.png",
+    "category": "baby",
+    "price": 450,
+    "featured": true,
+    "sortOrder": 1
+  },
+  {
+    "id": "prod_008", 
+    "name": "Baby Socks",
+    "imageUrl": "./img/8.png",
+    "featured": true,
+    "sortOrder": 2
+  },
+  {
+    "id": "prod_009",
+    "name": "New Product",
+    "imageUrl": "./img/9.png",
+    "price": 250,
+    "featured": false,
+    "sortOrder": 3
+  }
+]

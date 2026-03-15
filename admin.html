@@ -3,72 +3,49 @@
 <head>
   <!-- =============================================
        KNOTTED & KIND — Admin Panel (admin.html)
-       
-       🔒 This page is NOT linked anywhere on the website.
-       Access it directly at: yoursite.com/admin.html
-       Default login: admin / knotted2025
-       (Change credentials in admin.js → ADMIN_CONFIG)
+       🔒 Not linked anywhere on the public site.
+       Access: yoursite.com/admin.html
+       Default: admin / knotted2025
+       Change credentials in admin.js → ADMIN_CONFIG
        ============================================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel — Knotted & Kind</title>
-
-  <!-- Prevent search engines from indexing this page -->
+  <title>Admin — Knotted & Kind</title>
   <meta name="robots" content="noindex, nofollow" />
 
-  <!-- Font Awesome CDN -->
+  <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <!-- Admin Styles (separate CSS file) -->
-  <link rel="stylesheet" href="admin.css" />
+  <!-- Admin Styles -->
+  <link rel="stylesheet" href="css/admin.css" />
 </head>
 <body>
 
   <!-- =============================================
        LOGIN SCREEN
-       Shown by default; hidden after successful auth.
        ============================================= -->
   <div id="loginScreen">
     <div class="login-box">
-
-      <!-- Brand -->
       <div class="login-logo">Knotted <span>& Kind</span></div>
       <div class="login-subtitle">Admin Panel · Restricted Access</div>
 
-      <!-- Login Card -->
       <div class="login-card">
         <h2>Welcome back</h2>
-        <p>Sign in to manage your product catalog.</p>
+        <p>Sign in to manage your product catalog and images.</p>
 
         <form id="loginForm" novalidate>
-
-          <!-- Username -->
           <div class="admin-form-group">
             <label class="admin-label" for="adminUsername">Username</label>
-            <input
-              type="text"
-              id="adminUsername"
-              class="admin-input"
-              placeholder="Enter username"
-              autocomplete="username"
-              spellcheck="false"
-            />
+            <input type="text" id="adminUsername" class="admin-input" placeholder="Enter username" autocomplete="username" spellcheck="false" />
             <div class="input-hint" id="userError"></div>
           </div>
 
-          <!-- Password -->
           <div class="admin-form-group">
             <label class="admin-label" for="adminPassword">Password</label>
             <div class="password-wrap">
-              <input
-                type="password"
-                id="adminPassword"
-                class="admin-input"
-                placeholder="Enter password"
-                autocomplete="current-password"
-              />
-              <button type="button" class="toggle-pw" id="togglePassword" aria-label="Toggle password">
+              <input type="password" id="adminPassword" class="admin-input" placeholder="Enter password" autocomplete="current-password" />
+              <button type="button" class="toggle-pw" id="togglePassword" aria-label="Toggle password visibility">
                 <i class="fa-solid fa-eye"></i>
               </button>
             </div>
@@ -76,8 +53,7 @@
           </div>
 
           <button type="submit" class="btn-login">
-            <i class="fa-solid fa-arrow-right-to-bracket" style="margin-right:0.4rem;"></i>
-            Sign In
+            <i class="fa-solid fa-arrow-right-to-bracket" style="margin-right:0.4rem;"></i> Sign In
           </button>
         </form>
       </div>
@@ -91,25 +67,18 @@
 
   <!-- =============================================
        ADMIN APP SHELL
-       Hidden until login; shown via JS.
        ============================================= -->
   <div id="adminApp">
 
-    <!-- =========================================
-         SIDEBAR
-         ========================================= -->
+    <!-- SIDEBAR -->
     <aside class="admin-sidebar">
-
-      <!-- Logo -->
       <div class="sidebar-logo">
         <div class="sidebar-logo-text">Knotted <span>& Kind</span></div>
         <span class="sidebar-badge">Admin Dashboard</span>
       </div>
 
-      <!-- Navigation -->
       <nav class="sidebar-nav">
         <div class="sidebar-section-label">Manage</div>
-
         <a class="sidebar-link active" data-tab="products">
           <i class="fa-solid fa-box-open"></i>
           Products
@@ -117,71 +86,50 @@
         </a>
 
         <div class="sidebar-section-label" style="margin-top:0.5rem;">Tools</div>
-
         <a class="sidebar-link" id="btnExport">
-          <i class="fa-solid fa-download"></i>
-          Export JSON
+          <i class="fa-solid fa-download"></i> Export JSON
         </a>
-
         <a class="sidebar-link" id="btnImport">
-          <i class="fa-solid fa-upload"></i>
-          Import JSON
+          <i class="fa-solid fa-upload"></i> Import JSON
         </a>
-        <!-- Hidden file input for import -->
         <input type="file" id="importFileInput" accept=".json" style="display:none;" />
 
         <div class="sidebar-section-label" style="margin-top:0.5rem;">Site</div>
-
         <a class="sidebar-link" href="index.html" target="_blank">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          View Website
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> View Website
         </a>
-
         <a class="sidebar-link" href="products.html" target="_blank">
-          <i class="fa-solid fa-store"></i>
-          View Shop
+          <i class="fa-solid fa-store"></i> View Shop
         </a>
       </nav>
 
-      <!-- Footer / Logout -->
       <div class="sidebar-footer">
         <button class="btn-logout" id="btnLogout">
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          Log Out
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
         </button>
       </div>
     </aside>
 
 
-    <!-- =========================================
-         MAIN CONTENT
-         ========================================= -->
+    <!-- MAIN CONTENT -->
     <div class="admin-main">
 
       <!-- Top Bar -->
       <header class="admin-topbar">
         <div>
           <div class="topbar-title">Product Manager</div>
-          <div class="topbar-subtitle">Add, edit, reorder and manage your catalog</div>
+          <div class="topbar-subtitle">Add, edit, upload images, and manage your catalog</div>
         </div>
         <div class="topbar-actions">
-          <!-- Search -->
           <div style="position:relative;">
-            <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:0.75rem; top:50%; transform:translateY(-50%); color:#8a7d72; font-size:0.8rem;"></i>
-            <input
-              type="search"
-              id="tableSearch"
-              placeholder="Search products..."
-              style="background:#1e1b18; border:1px solid #332e28; border-radius:0.5rem; padding:0.55rem 0.9rem 0.55rem 2.2rem; color:#f0ebe4; font-family:'DM Sans',sans-serif; font-size:0.82rem; outline:none; width:200px; transition:border-color 0.2s;"
-              onfocus="this.style.borderColor='#d4a9a0'"
-              onblur="this.style.borderColor='#332e28'"
-            />
+            <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:0.75rem;top:50%;transform:translateY(-50%);color:#8a7d72;font-size:0.8rem;"></i>
+            <input type="search" id="tableSearch" placeholder="Search products..."
+              style="background:#1e1b18;border:1px solid #332e28;border-radius:0.5rem;padding:0.55rem 0.9rem 0.55rem 2.2rem;color:#f0ebe4;font-family:'DM Sans',sans-serif;font-size:0.82rem;outline:none;width:200px;transition:border-color 0.2s;"
+              onfocus="this.style.borderColor='#d4a9a0'" onblur="this.style.borderColor='#332e28'" />
           </div>
-          <!-- Reset button -->
           <button class="btn-admin btn-admin-secondary" id="btnReset" title="Reset to default products">
             <i class="fa-solid fa-rotate-left"></i> Reset
           </button>
-          <!-- Add Product -->
           <button class="btn-admin btn-admin-primary" id="btnAddProduct">
             <i class="fa-solid fa-plus"></i> Add Product
           </button>
@@ -192,7 +140,7 @@
       <!-- Scrollable Content -->
       <div class="admin-content">
 
-        <!-- ── STATS ROW ── -->
+        <!-- STAT CARDS -->
         <div class="stats-row">
           <div class="stat-card accent1">
             <div class="stat-icon"><i class="fa-solid fa-box-open"></i></div>
@@ -216,14 +164,15 @@
           </div>
         </div>
 
-        <!-- ── PRODUCTS TABLE ── -->
+
+        <!-- PRODUCT TABLE -->
         <div id="panel-products" class="admin-panel">
           <div class="section-card">
             <div class="section-card-header">
               <span class="section-card-title">All Products</span>
-              <span style="font-size:0.75rem; color:#8a7d72;">
+              <span style="font-size:0.75rem;color:#8a7d72;">
                 <i class="fa-solid fa-grip-lines-vertical" style="margin-right:0.3rem;"></i>
-                Drag rows to reorder · Changes auto-save
+                Drag rows to reorder · All changes auto-save
               </span>
             </div>
             <div class="section-card-body" style="overflow-x:auto;">
@@ -241,21 +190,21 @@
                   </tr>
                 </thead>
                 <tbody id="productTableBody">
-                  <!-- Populated by admin.js -->
+                  <!-- Rendered by admin.js -->
                 </tbody>
               </table>
             </div>
           </div>
 
           <!-- Help text -->
-          <div style="font-size:0.75rem; color:#8a7d72; line-height:1.8; padding:0 0.2rem;">
-            <i class="fa-solid fa-circle-info" style="margin-right:0.3rem; color:#d4a9a0;"></i>
-            <strong style="color:#a89b8c;">Visible toggle</strong> — shows/hides the product on your shop page.
+          <div style="font-size:0.75rem;color:#8a7d72;line-height:1.8;padding:0 0.2rem;">
+            <i class="fa-solid fa-circle-info" style="margin-right:0.3rem;color:#d4a9a0;"></i>
+            <strong style="color:#a89b8c;">Images</strong> — upload from device or paste a Google Drive share link in each product's edit form.
+            &nbsp;·&nbsp;
+            <strong style="color:#a89b8c;">Visible</strong> — shows/hides on the shop page.
             &nbsp;·&nbsp;
             <i class="fa-solid fa-star" style="color:#d4b86a;"></i>
-            <strong style="color:#a89b8c;">Star</strong> — marks product as featured on the homepage.
-            &nbsp;·&nbsp;
-            All changes are saved instantly and reflected on your website without refreshing.
+            <strong style="color:#a89b8c;">Star</strong> — appears on homepage featured section.
           </div>
         </div>
 
@@ -273,19 +222,19 @@
       <!-- Modal Header -->
       <div class="modal-header">
         <span class="modal-title" id="modalTitle">Add New Product</span>
-        <button class="modal-close" id="btnCloseModal" aria-label="Close modal">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <button class="modal-close" id="btnCloseModal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <!-- Modal Body: Product Form -->
+      <!-- Modal Body -->
       <div class="modal-body">
         <form id="productForm" novalidate>
 
-          <!-- Hidden ID field for edits -->
+          <!-- Hidden fields -->
           <input type="hidden" id="hiddenProductId" />
+          <input type="hidden" id="formBadge" />
+          <input type="hidden" id="formImageUrl" /><!-- stores final resolved image URL -->
 
-          <!-- Row 1: Name + Category -->
+          <!-- ── Row 1: Name + Category ── -->
           <div class="form-row">
             <div class="form-group">
               <label for="formName">Product Name *</label>
@@ -302,62 +251,123 @@
             </div>
           </div>
 
-          <!-- Row 2: Price + Original Price -->
+          <!-- ── Row 2: Price + Original Price ── -->
           <div class="form-row">
             <div class="form-group">
               <label for="formPrice">Price (₹) *</label>
               <input type="number" id="formPrice" placeholder="e.g. 250" min="0" step="1" required />
             </div>
             <div class="form-group">
-              <label for="formOriginalPrice">Original Price (₹) <span style="opacity:0.5;">optional — shows strikethrough</span></label>
-              <input type="number" id="formOriginalPrice" placeholder="e.g. 350" min="0" step="1" />
+              <label for="formOriginalPrice">
+                Original Price (₹)
+                <span style="opacity:0.45;font-size:0.65rem;text-transform:none;letter-spacing:0;"> — shows strikethrough</span>
+              </label>
+              <input type="number" id="formOriginalPrice" placeholder="e.g. 350 (optional)" min="0" step="1" />
             </div>
           </div>
 
-          <!-- Row 3: Description -->
+          <!-- ── Row 3: Description ── -->
           <div class="form-row full">
             <div class="form-group">
               <label for="formDescription">Description *</label>
-              <textarea id="formDescription" placeholder="Short product description..." rows="3" required></textarea>
+              <textarea id="formDescription" rows="3" placeholder="Short product description..." required></textarea>
             </div>
           </div>
 
-          <!-- Row 4: WhatsApp Number -->
+          <!-- ── Row 4: WhatsApp Number ── -->
           <div class="form-row full">
             <div class="form-group">
-              <label for="formWaNumber">WhatsApp Number (with country code, no +)</label>
-              <input type="text" id="formWaNumber" placeholder="e.g. 919824010313" />
+              <label for="formWaNumber">
+                WhatsApp Number
+                <span style="opacity:0.45;font-size:0.65rem;text-transform:none;letter-spacing:0;"> — with country code, no + (e.g. 919824010313)</span>
+              </label>
+              <input type="text" id="formWaNumber" placeholder="919824010313" />
             </div>
           </div>
 
-          <!-- Emoji Picker -->
-          <div class="form-group" style="margin-bottom:1.2rem;">
-            <label>Product Emoji * <span id="emojiPreview" style="margin-left:0.5rem; font-size:1.2rem;"></span></label>
-            <input type="hidden" id="formEmoji" required />
-            <div class="emoji-picker-row" id="emojiPicker">
-              <!-- Populated by admin.js -->
+          <!-- ══════════════════════════════════
+               PRODUCT IMAGE UPLOADER
+               Two tabs: Upload File | Link / Drive
+               ══════════════════════════════════ -->
+          <div class="form-row full" style="margin-bottom:0;">
+            <div class="form-group">
+              <label>Product Image</label>
             </div>
           </div>
 
-          <!-- Background Color Picker -->
-          <div class="form-group" style="margin-bottom:1.2rem;">
-            <label>Card Background Color *</label>
-            <input type="hidden" id="formBgClass" required />
-            <div class="color-picker-row" id="colorPicker">
-              <!-- Populated by admin.js -->
+          <!-- Tab switcher -->
+          <div class="img-source-tabs">
+            <button type="button" class="img-tab-btn active" data-panel="panelUpload">
+              <i class="fa-solid fa-arrow-up-from-bracket"></i> Upload File
+            </button>
+            <button type="button" class="img-tab-btn" data-panel="panelUrlLink">
+              <i class="fa-solid fa-link"></i> Image URL / Drive Link
+            </button>
+          </div>
+
+          <!-- TAB A: Upload from device -->
+          <div class="img-tab-panel active" id="panelUpload">
+            <div class="img-dropzone" id="imgDropzone">
+              <!-- The actual file input sits invisibly over the entire zone -->
+              <input type="file" id="imgFileInput" accept="image/*" tabindex="-1" />
+              <span class="dropzone-icon"><i class="fa-solid fa-cloud-arrow-up"></i></span>
+              <p class="dropzone-title">Drag & drop your photo here</p>
+              <p class="dropzone-sub">or <span>click to browse</span> · JPG, PNG, WEBP, GIF</p>
             </div>
           </div>
 
-          <!-- Badge Picker -->
-          <div class="form-group" style="margin-bottom:1.2rem;">
-            <label>Badge Label</label>
-            <input type="hidden" id="formBadge" />
-            <div class="badge-preview-row" id="badgePicker">
-              <!-- Populated by admin.js -->
+          <!-- TAB B: URL or Google Drive link -->
+          <div class="img-tab-panel" id="panelUrlLink">
+            <div class="img-url-panel">
+
+              <!-- URL input -->
+              <div class="img-url-input-wrap">
+                <input
+                  type="url"
+                  id="imgUrlInput"
+                  placeholder="https://... or Google Drive share link"
+                />
+                <button type="button" class="btn-url-apply" id="btnApplyUrl">Apply</button>
+              </div>
+
+              <!-- Google Drive helper -->
+              <div class="drive-helper">
+                <i class="fa-brands fa-google-drive"></i>
+                <strong style="color:#7aa8d4;">Google Drive:</strong>
+                Share your image (Anyone with the link → Viewer), then paste the link here.
+                It will be auto-converted to a direct embed URL.
+                <br/>
+                <span style="opacity:0.6;">Example: drive.google.com/file/d/<em>FILE_ID</em>/view?usp=sharing</span>
+              </div>
+
             </div>
           </div>
 
-          <!-- Visibility + Featured Toggles -->
+          <!-- Image Preview (shown after any image is set) -->
+          <div class="img-preview-box" id="imgPreviewBox">
+            <img id="imgPreview" src="" alt="Product preview" />
+            <div class="img-preview-actions">
+              <span class="img-preview-label">
+                <i class="fa-solid fa-circle-check"></i>
+                <span class="img-preview-filename" id="imgFilename"></span>
+              </span>
+              <button type="button" class="btn-remove-img" id="btnRemoveImg">
+                <i class="fa-solid fa-xmark"></i> Remove
+              </button>
+            </div>
+          </div>
+
+          <!-- ── Badge Picker ── -->
+          <div class="form-row full" style="margin-top:1.4rem;">
+            <div class="form-group">
+              <label>Badge Label <span style="opacity:0.45;font-size:0.65rem;text-transform:none;letter-spacing:0;">(shown on the card image)</span></label>
+              <div class="badge-preview-row" id="badgePicker">
+                <!-- Built by admin.js -->
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Toggles: Visible + Featured ── -->
           <div class="toggle-row">
             <div class="toggle-label">
               <strong>Visible on Shop</strong>
@@ -372,7 +382,7 @@
           <div class="toggle-row">
             <div class="toggle-label">
               <strong>Featured on Homepage</strong>
-              Show in the homepage featured products section
+              Show in the featured products section
             </div>
             <label class="visibility-toggle">
               <input type="checkbox" id="formFeatured" />
@@ -396,21 +406,10 @@
 
 
   <!-- =============================================
-       SCRIPTS (order matters)
-       1. products-data.js — shared data layer
-       2. admin.js          — admin panel logic
+       SCRIPTS
        ============================================= -->
-  <script src="products-data.js"></script>
-  <script src="admin.js"></script>
-
-  <!-- Update sidebar badge count after init -->
-  <script>
-    // Sync the sidebar product count badge whenever the page loads
-    document.addEventListener("DOMContentLoaded", () => {
-      const badge = document.getElementById("sidebarProductCount");
-      if (badge) badge.textContent = getProducts().length;
-    });
-  </script>
+  <script src="js/products-data.js"></script>
+  <script src="js/admin.js"></script>
 
 </body>
 </html>
