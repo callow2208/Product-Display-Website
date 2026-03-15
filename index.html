@@ -314,6 +314,91 @@
         display: none;
       }
     }
+
+    /* Hero Image Carousel */
+    .hero-carousel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      overflow: hidden;
+    }
+
+    .carousel-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+      z-index: 1;
+    }
+
+    .carousel-img.active {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    /* Ensure no partition lines */
+    .hero-img-main {
+      background: none !important;
+    }
+
+    /* About Section Carousel */
+    .about-carousel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      overflow: hidden;
+    }
+
+    .about-carousel-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .about-carousel-img.active {
+      opacity: 1;
+    }
+
+    /* Featured Products - Carousel support */
+    .product-carousel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      overflow: hidden;
+    }
+
+    .product-carousel-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .product-carousel-img.active {
+      opacity: 1;
+    }
+
+    /* Remove backgrounds that show partition lines */
+    .about-img-main,
+    .product-img-main {
+      background: none !important;
+    }
   </style>
 </head>
 
@@ -367,9 +452,14 @@
         <div class="col-lg-6 d-flex justify-content-center">
           <div class="hero-visual">
             <div class="hero-img-main">
-              <!-- Place a real hero/brand photo here if available -->
-              <!-- <i class="fa-solid fa-scissors" style="font-size:5rem;color:rgba(61,53,48,0.18);"></i> -->
-              <img src="img/6.png" alt="Handmade Crochet" style="width:100%;height:100%;object-fit:cover;">
+              <div class="hero-img-main">
+                <div class="hero-carousel">
+                  <img src="img/6.png" alt="Handmade Crochet 1" class="carousel-img active">
+                  <img src="img/23.png" alt="Handmade Crochet 2" class="carousel-img">
+                  <!-- Add more images here as needed -->
+                </div>
+              </div>
+
             </div>
             <div class="hero-pill">
               <i class="fa-solid fa-hand-holding-heart"></i> 100% Handmade
@@ -419,9 +509,13 @@
         <div class="col-lg-5 reveal">
           <div style="position:relative;">
             <div class="about-img-main">
-              <!-- Replace the div below with an <img> tag to show a real about/brand photo -->
-              <!-- <div class="about-img-placeholder">🌸</div> -->
-              <img src="img/1.png" alt="About Us" style="width:100%;height:100%;object-fit:cover;">
+              <div class="about-img-main">
+                <div class="about-carousel">
+                  <img src="img/1.png" alt="About Us 1" class="about-carousel-img active">
+                  <img src="img/10.png" alt="About Us 2" class="about-carousel-img">
+                </div>
+              </div>
+
             </div>
             <div class="about-img-float">🧵</div>
           </div>
@@ -484,7 +578,8 @@
           <div class="value-card">
             <div class="value-icon">🤍</div>
             <h5 class="value-title">Made with Love</h5>
-            <p class="value-desc">Every stitch is infused with heart—handcrafted by passionate makers who pour joy into yarn.</p>
+            <p class="value-desc">Every stitch is infused with heart—handcrafted by passionate makers who pour joy into
+              yarn.</p>
           </div>
         </div>
         <div class="col-md-3 col-6">
@@ -498,7 +593,8 @@
           <div class="value-card">
             <div class="value-icon">✨</div>
             <h5 class="value-title">Premium Quality</h5>
-            <p class="value-desc">Superior materials and expert precision create heirlooms that stand the test of time.</p>
+            <p class="value-desc">Superior materials and expert precision create heirlooms that stand the test of time.
+            </p>
           </div>
         </div>
         <div class="col-md-3 col-6">
@@ -635,6 +731,74 @@
   <script src="js/products-data.js"></script>
   <script src="js/main.js"></script>
   <script src="js/products.json"></script>
+  <script>
+    // Multi-Carousel System - Auto fade for ALL image sections
+    document.addEventListener('DOMContentLoaded', function () {
+
+      // Hero Carousel
+      initCarousel('.hero-carousel', 4000);
+
+      // About Carousel  
+      initCarousel('.about-carousel', 5000);
+
+      // Featured Products (dynamic - handles multiple)
+      initFeaturedCarousels();
+
+      function initCarousel(carouselSelector, interval) {
+        const carouselImgs = document.querySelectorAll(`${carouselSelector} .carousel-img, ${carouselSelector} .about-carousel-img`);
+        if (carouselImgs.length === 0) return;
+
+        let currentIndex = 0;
+
+        function nextImage() {
+          carouselImgs[currentIndex].classList.remove('active');
+          currentIndex = (currentIndex + 1) % carouselImgs.length;
+          setTimeout(() => {
+            carouselImgs[currentIndex].classList.add('active');
+          }, 500);
+        }
+
+        setInterval(nextImage, interval);
+        carouselImgs[0].classList.add('active');
+      }
+
+      function initFeaturedCarousels() {
+        // Wait for featured products to load, then init carousels
+        const checkFeatured = setInterval(() => {
+          const featuredCards = document.querySelectorAll('#featuredGrid .product-card');
+          if (featuredCards.length > 0) {
+            featuredCards.forEach(card => {
+              const productImgContainer = card.querySelector('.product-img-main');
+              if (productImgContainer && !productImgContainer.classList.contains('product-carousel')) {
+                initProductCarousel(productImgContainer);
+              }
+            });
+            clearInterval(checkFeatured);
+          }
+        }, 100);
+      }
+
+      function initProductCarousel(container) {
+        container.classList.add('product-carousel');
+        container.innerHTML = `
+      <div class="product-carousel">
+        <img src="${container.querySelector('img')?.src || 'img/1.png'}" alt="Product 1" class="product-carousel-img active">
+          <img src="img/2.png" alt="Product 2" class="product-carousel-img">
+            <img src="img/3.png" alt="Product 3" class="product-carousel-img">
+            </div>
+    `;
+
+        const imgs = container.querySelectorAll('.product-carousel-img');
+        let index = 0;
+
+        setInterval(() => {
+          imgs[index].classList.remove('active');
+          index = (index + 1) % imgs.length;
+          setTimeout(() => imgs[index].classList.add('active'), 400);
+        }, 6000);
+      }
+    });
+  </script>
 
 </body>
 
