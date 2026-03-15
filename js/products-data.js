@@ -27,7 +27,7 @@ function convertDriveUrl(url) {
 
   // Already a direct thumbnail URL — pass through unchanged
   if (url.includes("drive.google.com/thumbnail") ||
-      url.includes("drive.google.com/uc?export=view")) return url;
+    url.includes("drive.google.com/uc?export=view")) return url;
 
   // Pattern 1: /file/d/FILE_ID/
   const fileMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
@@ -329,7 +329,7 @@ async function getProducts() {
 
 // Make other functions async too
 async function getFeaturedProducts() {
-  return (await getProducts()).filter(p => p.featured).slice(0,4);
+  return (await getProducts()).filter(p => p.featured).slice(0, 4);
 }
 
 
@@ -343,8 +343,8 @@ function getVisibleProducts() {
 /** Featured visible products (for homepage) */
 function getFeaturedProducts() {
   return window.DEFAULT_PRODUCTS
-  .filter(p => p.featured)
-  .slice(0, 4);
+    .filter(p => p.featured)
+    .slice(0, 4);
 }
 
 /** Add a new product */
@@ -396,6 +396,10 @@ function resetToDefaults() {
    Renders one product card HTML string with a real <img>.
    Used by products.html (shop grid) and index.html (featured).
    ============================================================ */
+/* ============================================================
+   9. CAROUSEL-ENABLED CARD RENDERER (v3)
+   Renders product cards with built-in 4-image auto-fading carousel
+   ============================================================ */
 function renderProductCard(product) {
   const {
     id, name, categoryLabel, imageUrl,
@@ -403,8 +407,8 @@ function renderProductCard(product) {
     price, originalPrice, waNumber
   } = product;
 
-  const src    = resolveImageUrl(imageUrl);
-  const waMsg  = encodeURIComponent(`Hello, I would like to order ${name}`);
+  const primarySrc = resolveImageUrl(imageUrl);
+  const waMsg = encodeURIComponent(`Hello, I would like to order ${name}`);
   const waLink = `https://wa.me/${waNumber || "919824010313"}?text=${waMsg}`;
 
   const badgeHtml = badge
@@ -415,17 +419,23 @@ function renderProductCard(product) {
     ? `<span class="price-original">₹${originalPrice}</span>`
     : "";
 
-  /* Note: onerror swaps broken image src for the placeholder inline SVG */
+  // Generate 4 carousel image URLs (primary + alternates)
+  const carouselImages = [
+    primarySrc,
+    `./img/${(parseInt(id.match(/\d+/)?.[0] || '1') + 1) % 9 + 1}.png`,  // Image 2
+    `./img/${(parseInt(id.match(/\d+/)?.[0] || '1') + 2) % 9 + 1}.png`,  // Image 3  
+    `./img/${(parseInt(id.match(/\d+/)?.[0] || '1') + 3) % 9 + 1}.png`   // Image 4
+  ].map(src => src || PLACEHOLDER_IMG);
+
   return `
     <div class="product-card" data-id="${id}">
       <div class="product-img-wrap">
-        <img
-          src="${src}"
-          alt="${name}"
-          class="product-photo"
-          loading="lazy"
-          onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}'"
-        />
+        <div class="product-img-main product-carousel">
+          <img src="${carouselImages[0]}" alt="${name} - View 1" class="product-carousel-img active" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}'"/>
+          <img src="${carouselImages[1]}" alt="${name} - View 2" class="product-carousel-img" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}'"/>
+          <img src="${carouselImages[2]}" alt="${name} - View 3" class="product-carousel-img" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}'"/>
+          <img src="${carouselImages[3]}" alt="${name} - View 4" class="product-carousel-img" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}'"/>
+        </div>
         ${badgeHtml}
         <button class="btn-wishlist" aria-label="Add to wishlist">
           <i class="fa-regular fa-heart"></i>
@@ -447,6 +457,7 @@ function renderProductCard(product) {
       </div>
     </div>`;
 }
+
 
 /* ============================================================
    8. WISHLIST BUTTONS — attach toggle listeners
@@ -516,7 +527,7 @@ window.DEFAULT_PRODUCTS = [
     "sortOrder": 1
   },
   {
-    "id": "prod_002", 
+    "id": "prod_002",
     "name": "Baby Socks",
     "category": "baby",
     "categoryLabel": "Baby Collection",
@@ -564,7 +575,7 @@ window.DEFAULT_PRODUCTS = [
     "sortOrder": 4
   },
   {
-    "id": "prod_005", 
+    "id": "prod_005",
     "name": "Baby Mittens",
     "category": "baby",
     "categoryLabel": "Baby Collection",
@@ -612,7 +623,7 @@ window.DEFAULT_PRODUCTS = [
     "sortOrder": 7
   },
   {
-    "id": "prod_008", 
+    "id": "prod_008",
     "name": "Baby Booties",
     "category": "baby",
     "categoryLabel": "Baby Collection",

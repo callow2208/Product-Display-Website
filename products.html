@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- =============================================
        KNOTTED & KIND — Products Page (products.html)
@@ -13,10 +14,83 @@
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
   <!-- Shared Styles -->
   <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* Products Page - Auto-Fading Image Carousels */
+    .product-carousel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      overflow: hidden;
+    }
+
+    .product-carousel-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .product-carousel-img.active {
+      opacity: 1;
+    }
+
+    /* Remove partition lines */
+    .product-img-main,
+    .product-carousel {
+      background: none !important;
+    }
+
+    /* Product Carousel Support */
+    .product-img-main.product-carousel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: none !important;
+    }
+
+    .product-carousel-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .product-carousel-img.active {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    /* Ensure badges and buttons stay on top */
+    .product-img-wrap {
+      position: relative;
+    }
+
+    .product-badge,
+    .btn-wishlist {
+      z-index: 10;
+    }
+  </style>
+
+
 </head>
+
 <body>
 
   <!-- NAVBAR -->
@@ -50,7 +124,8 @@
       </p>
       <h1 class="page-title mb-2">Our Collection</h1>
       <p class="page-subtitle">
-        From soft, story-filled stitches to vibrant, wearable art: discover our curated collection of love-infused crochet wonders.
+        From soft, story-filled stitches to vibrant, wearable art: discover our curated collection of love-infused
+        crochet wonders.
       </p>
     </div>
   </div>
@@ -86,10 +161,11 @@
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
           <div>
             <h3 class="mid-banner-title">Want something <em>custom made?</em></h3>
-            <p>Bring your vision to life with our bespoke crochet service: personalized designs, premium yarns, and stitches made just for you.</p>
+            <p>Bring your vision to life with our bespoke crochet service: personalized designs, premium yarns, and
+              stitches made just for you.</p>
           </div>
           <a href="https://wa.me/919824010313?text=Hello%2C%20I%20would%20like%20to%20place%20a%20custom%20order"
-             class="btn-cream" target="_blank">
+            class="btn-cream" target="_blank">
             <i class="fa-brands fa-whatsapp"></i> Custom Order
           </a>
         </div>
@@ -110,7 +186,8 @@
             <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
-            <a href="https://wa.me/919824010313" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://wa.me/919824010313" target="_blank" aria-label="WhatsApp"><i
+                class="fa-brands fa-whatsapp"></i></a>
           </div>
         </div>
         <div class="col-lg-2 col-6">
@@ -129,7 +206,8 @@
         <div class="col-lg-4">
           <p class="footer-heading">Get in Touch</p>
           <p style="font-size:0.84rem;color:rgba(250,246,241,0.55);line-height:2;">
-            <a href="mailto:client.techsreni@gmail.com"><i class="fa-solid fa-envelope me-2" style="color:var(--dusty);"></i> hello@knottedandkind.com<br></a>
+            <a href="mailto:client.techsreni@gmail.com"><i class="fa-solid fa-envelope me-2"
+                style="color:var(--dusty);"></i> hello@knottedandkind.com<br></a>
             <a href="https://wa.me/919824010313" target="_blank" aria-label="WhatsApp">
               <i class="fa-brands fa-whatsapp me-2" style="color:#25d366;"></i> +91 98240 10313<br>
             </a>
@@ -139,7 +217,9 @@
       </div>
       <div class="footer-bottom d-flex flex-wrap justify-content-between">
         <span>© 2025 Knotted & Kind. All rights reserved.</span>
-        <span>Designed & Developed by <span style="font-family: 'Cormorant Garamond'; font-style: italic; color: var(--dusty); font-weight: bolder; font-size: large;">Tech Sreni</span></span>
+        <span>Designed & Developed by <span
+            style="font-family: 'Cormorant Garamond'; font-style: italic; color: var(--dusty); font-weight: bolder; font-size: large;">Tech
+            Sreni</span></span>
         <span>Made with 🧶 and love</span>
       </div>
     </div>
@@ -147,14 +227,55 @@
 
   <!-- WhatsApp Float -->
   <a href="https://wa.me/919824010313?text=Hello%20Knotted%20%26%20Kind!%20I%20would%20like%20to%20know%20more."
-     class="wa-float" target="_blank" aria-label="WhatsApp">
+    class="wa-float" target="_blank" aria-label="WhatsApp">
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 
+  <!-- SCRIPTS -->
   <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/products-data.js"></script>
   <script src="js/main.js"></script>
 
+  <script>
+    // Simplified Products Page Carousel Init
+    document.addEventListener('DOMContentLoaded', function () {
+      function initProductCarousels() {
+        document.querySelectorAll('.product-carousel').forEach((carousel, index) => {
+          if (carousel.dataset.carouselInit) return;
+
+          const imgs = carousel.querySelectorAll('.product-carousel-img');
+          let currentIndex = 0;
+
+          const interval = setInterval(() => {
+            imgs[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % imgs.length;
+            setTimeout(() => imgs[currentIndex].classList.add('active'), 400);
+          }, 4500 + (index * 150)); // Staggered timing
+
+          carousel.dataset.carouselInit = 'true';
+          carousel.carouselInterval = interval;
+        });
+      }
+
+      // Run after products load + on filter changes
+      const observer = new MutationObserver(initProductCarousels);
+      setTimeout(() => {
+        const grid = document.getElementById('ProductGrid');
+        if (grid) observer.observe(grid, { childList: true, subtree: true });
+        initProductCarousels();
+      }, 800);
+
+      document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('filter-btn')) {
+          setTimeout(initProductCarousels, 400);
+        }
+      });
+    });
+  </script>
+
+
+
 </body>
+
 </html>
